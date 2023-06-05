@@ -1,3 +1,4 @@
+import 'package:demo/models/Student.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var students = ["student1", "student2", "student3", "student4"];
+    List<Student> students = [
+      Student("Seidy", "Kante", 80),
+      Student("Oumar", "Sacko", 45),
+      Student("Amir", "Kenth", 38)
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("My flutter App"),
@@ -22,15 +28,22 @@ class MyApp extends StatelessWidget {
             child: ListView.builder(
                 itemCount: students.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Text(students[index]);
+                  return ListTile(
+
+                    title: Text(
+                        "${students[index].firstName} ${students[index].lastName}"),
+                    subtitle: Text("Grade from exam: ${students[index].grade}"),
+                    trailing: displayStatus(students[index].grade),
+                    leading: Image.network(students[index].imageSrc),
+                  );
                 }),
           ),
           Center(
             child: ElevatedButton(
                 onPressed: () {
                   //functions call
-                  String msg = statusMessage(55);
-                  displayMessage(context, msg);
+                  //String msg = statusMessage(55);
+                  //displayMessage(context, msg);
                 },
                 child: const Text('Press Button')),
           ),
@@ -40,23 +53,34 @@ class MyApp extends StatelessWidget {
   }
 
   //Functions
-  String statusMessage(int not) {
+
+  Widget displayStatus(int grade) {
+    if (grade >= 50) {
+      return const Icon(Icons.done);
+    } else if (grade >= 40) {
+      return const Icon(Icons.adjust_rounded);
+    } else {
+      return const Icon(Icons.clear);
+    }
+  }
+
+/*
+  String displayMessage(int not){
     String msg = '';
     if (not >= 50) {
-      msg = "High Level";
+      msg = "Geçti";
     } else if (not >= 40) {
-      msg = "Middle Level";
+      msg = "Bütünlemeye kaldı";
     } else {
-      msg = "Low Level";
+      msg = "Kaldı";
     }
     return msg;
   }
-
-  void displayMessage(BuildContext context, msg) {
+  void calExamNot(BuildContext context,msg){
     var alert = AlertDialog(
       title: const Text("Result"),
       content: Text(msg),
     );
-    showDialog(context: context, builder: (BuildContext context) => alert);
-  }
+    showDialog(context: context, builder: (BuildContext context)=>alert);
+  }*/
 }
