@@ -1,4 +1,5 @@
 import 'package:demo/models/Student.dart';
+import 'package:demo/screens/AddStudent.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -63,6 +64,7 @@ class _MyAppState extends State<MyApp> {
                 child: ElevatedButton(
                   onPressed: () {
                     //Adding Implementation
+                    Navigator.push(context,MaterialPageRoute(builder: (builder)=>const AddStudent()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
