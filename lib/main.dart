@@ -7,17 +7,26 @@ void main() {
   ));
 }
 
-class MyApp extends StatelessWidget {
+
+
+class MyApp extends StatefulWidget{
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  List<Student> students = [
+    Student("Seidy", "Kante", 80),
+    Student("Oumar", "Sacko", 45),
+    Student("Amir", "Kenth", 38)
+  ];
+
+  String selectedStudent = 'xStd';
+
+  @override
   Widget build(BuildContext context) {
-    List<Student> students = [
-      Student("Seidy", "Kante", 80),
-      Student("Oumar", "Sacko", 45),
-      Student("Amir", "Kenth", 38)
-    ];
-    String selectedStudent = 'xStd';
 
     return Scaffold(
       appBar: AppBar(
@@ -39,10 +48,13 @@ class MyApp extends StatelessWidget {
                         "Grade from exam: ${students[index].grade} [${students[index].getStatus}]"),
                     trailing: displayStatusIcon(students[index].grade),
                     onTap: () {
-                      print(
-                          "${students[index].firstName} ${students[index].lastName}");
-                      selectedStudent =
-                          "${students[index].firstName} ${students[index].lastName}";
+                      //print("${students[index].firstName} ${students[index].lastName}");
+
+                      setState(() {
+                        selectedStudent =
+                        "${students[index].firstName} ${students[index].lastName}";
+                      });
+
                     },
                   );
                 }),
@@ -63,7 +75,6 @@ class MyApp extends StatelessWidget {
   }
 
   //Functions
-
   Widget displayStatusIcon(int grade) {
     if (grade >= 50) {
       return const Icon(Icons.done);
@@ -73,14 +84,4 @@ class MyApp extends StatelessWidget {
       return const Icon(Icons.clear);
     }
   }
-
-/*
-
-  void calExamNot(BuildContext context,msg){
-    var alert = AlertDialog(
-      title: const Text("Result"),
-      content: Text(msg),
-    );
-    showDialog(context: context, builder: (BuildContext context)=>alert);
-  }*/
 }
