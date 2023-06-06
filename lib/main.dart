@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       Student("Oumar", "Sacko", 45),
       Student("Amir", "Kenth", 38)
     ];
+    String selectedStudent = 'xStd';
 
     return Scaffold(
       appBar: AppBar(
@@ -29,15 +30,24 @@ class MyApp extends StatelessWidget {
                 itemCount: students.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(students[index].imageSrc),
+                    ),
                     title: Text(
                         "${students[index].firstName} ${students[index].lastName}"),
-                    subtitle: Text("Grade from exam: ${students[index].grade}"),
-                    trailing: displayStatus(students[index].grade),
-                    leading: Image.network(students[index].imageSrc),
+                    subtitle: Text(
+                        "Grade from exam: ${students[index].grade} [${students[index].getStatus}]"),
+                    trailing: displayStatusIcon(students[index].grade),
+                    onTap: () {
+                      print(
+                          "${students[index].firstName} ${students[index].lastName}");
+                      selectedStudent =
+                          "${students[index].firstName} ${students[index].lastName}";
+                    },
                   );
                 }),
           ),
+          Text("Selected Student: $selectedStudent"),
           Center(
             child: ElevatedButton(
                 onPressed: () {
@@ -54,7 +64,7 @@ class MyApp extends StatelessWidget {
 
   //Functions
 
-  Widget displayStatus(int grade) {
+  Widget displayStatusIcon(int grade) {
     if (grade >= 50) {
       return const Icon(Icons.done);
     } else if (grade >= 40) {
@@ -65,17 +75,7 @@ class MyApp extends StatelessWidget {
   }
 
 /*
-  String displayMessage(int not){
-    String msg = '';
-    if (not >= 50) {
-      msg = "Geçti";
-    } else if (not >= 40) {
-      msg = "Bütünlemeye kaldı";
-    } else {
-      msg = "Kaldı";
-    }
-    return msg;
-  }
+
   void calExamNot(BuildContext context,msg){
     var alert = AlertDialog(
       title: const Text("Result"),
