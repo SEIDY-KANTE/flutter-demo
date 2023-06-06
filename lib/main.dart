@@ -7,9 +7,7 @@ void main() {
   ));
 }
 
-
-
-class MyApp extends StatefulWidget{
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
@@ -27,7 +25,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("My flutter App"),
@@ -52,22 +49,77 @@ class _MyAppState extends State<MyApp> {
 
                       setState(() {
                         selectedStudent =
-                        "${students[index].firstName} ${students[index].lastName}";
+                            "${students[index].firstName} ${students[index].lastName}";
                       });
-
                     },
                   );
                 }),
           ),
           Text("Selected Student: $selectedStudent"),
-          Center(
-            child: ElevatedButton(
-                onPressed: () {
-                  //functions call
-                  //String msg = statusMessage(55);
-                  //displayMessage(context, msg);
-                },
-                child: const Text('Press Button')),
+          Row(
+            children: [
+              Flexible(
+                fit: FlexFit.tight,
+                flex: 2,
+                child: ElevatedButton(
+                  onPressed: () {
+                    //Adding Implementation
+                  },
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.green, // Background color
+                      onPrimary: Colors.black //Text color (Foreground color)
+                      ),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.add),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Add"),
+                    ],
+                  ),
+                ),
+              ),
+              Flexible(
+                fit: FlexFit.tight,
+                flex: 2,
+                child: ElevatedButton(
+                    onPressed: () {
+                      //Updating Implementation
+                    },
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.grey, onPrimary: Colors.black),
+                    child: const Row(
+                      children: [
+                        Icon(Icons.update),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text("Update"),
+                      ],
+                    )),
+              ),
+              Flexible(
+                fit: FlexFit.tight,
+                flex: 2,
+                child: ElevatedButton(
+                  onPressed: () {
+                    //Delete Implementation
+                  },
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.red, onPrimary: Colors.black),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.delete),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Delete"),
+                    ],
+                  ),
+                ),
+              )
+            ],
           ),
         ],
       ),
