@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
     Student("Amir", "Kenth", 38)
   ];
 
-  String selectedStudent = 'xStd';
+  Student selectedStudent = Student.withID(0, '', '', 0);
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +48,13 @@ class _MyAppState extends State<MyApp> {
                       //print("${students[index].firstName} ${students[index].lastName}");
 
                       setState(() {
-                        selectedStudent =
-                            "${students[index].firstName} ${students[index].lastName}";
+                        selectedStudent = students[index];
                       });
                     },
                   );
                 }),
           ),
-          Text("Selected Student: $selectedStudent"),
+          Text("Selected Student: ${selectedStudent.firstName}"),
           Row(
             children: [
               Flexible(
@@ -66,9 +65,9 @@ class _MyAppState extends State<MyApp> {
                     //Adding Implementation
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.green, // Background color
-                      onPrimary: Colors.black //Text color (Foreground color)
-                      ),
+                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.black,
+                  ),
                   child: const Row(
                     children: [
                       Icon(Icons.add),
@@ -88,7 +87,8 @@ class _MyAppState extends State<MyApp> {
                       //Updating Implementation
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: Colors.grey, onPrimary: Colors.black),
+                        backgroundColor: Colors.grey,
+                        foregroundColor: Colors.black),
                     child: const Row(
                       children: [
                         Icon(Icons.update),
@@ -105,9 +105,18 @@ class _MyAppState extends State<MyApp> {
                 child: ElevatedButton(
                   onPressed: () {
                     //Delete Implementation
+                    setState(() {
+                      students.remove(selectedStudent);
+                    });
+                    var alert = const AlertDialog(
+                      title: Text("Process"),
+                      content: Text("Deleted"),
+                    );
+                    showDialog(context: context, builder: (builder) => alert);
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.red, onPrimary: Colors.black),
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.black),
                   child: const Row(
                     children: [
                       Icon(Icons.delete),
