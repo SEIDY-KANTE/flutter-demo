@@ -58,87 +58,100 @@ class _MyAppState extends State<MyApp> {
           Text("Selected Student: ${selectedStudent.firstName}"),
           Row(
             children: [
-              Flexible(
-                fit: FlexFit.tight,
-                flex: 2,
-                child: ElevatedButton(
-                  onPressed: () {
-                    //Adding Implementation
-                    Navigator.push(context,MaterialPageRoute(builder: (builder)=> AddStudent(students))).then((value) => {
-                      //Refreshing
-                      setState(() {
-                      selectedStudent = students[students.length-1];
-                    })
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    foregroundColor: Colors.black,
-                  ),
-                  child: const Row(
-                    children: [
-                      Icon(Icons.add),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text("Add"),
-                    ],
-                  ),
-                ),
-              ),
-              Flexible(
-                fit: FlexFit.tight,
-                flex: 2,
-                child: ElevatedButton(
-                    onPressed: () {
-                      //Updating Implementation
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey,
-                        foregroundColor: Colors.black),
-                    child: const Row(
-                      children: [
-                        Icon(Icons.update),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text("Update"),
-                      ],
-                    )),
-              ),
-              Flexible(
-                fit: FlexFit.tight,
-                flex: 2,
-                child: ElevatedButton(
-                  onPressed: () {
-                    //Delete Implementation
-                    setState(() {
-                      students.remove(selectedStudent);
-                    });
-                    var alert = AlertDialog(
-                      title: const Text("Process"),
-                      content:
-                          Text("${selectedStudent.firstName} has been Deleted"),
-                    );
-                    showDialog(context: context, builder: (builder) => alert);
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      foregroundColor: Colors.black),
-                  child: const Row(
-                    children: [
-                      Icon(Icons.delete),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text("Delete"),
-                    ],
-                  ),
-                ),
-              )
+              addStudentFlexible(),
+              updateStudentFlexible(),
+              deleteStudentFlexible(),
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  //========Flexible===============
+
+  Widget addStudentFlexible() {
+    return Flexible(
+      fit: FlexFit.tight,
+      flex: 2,
+      child: ElevatedButton(
+        onPressed: () {
+          //Adding Implementation
+          Navigator.push(context,
+                  MaterialPageRoute(builder: (builder) => AddStudent(students)))
+              .then((value) => {
+                    //Refreshing
+                    setState(() {
+                      selectedStudent = students[students.length - 1];
+                    })
+                  });
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.green,
+          foregroundColor: Colors.black,
+        ),
+        child: const Row(
+          children: [
+            Icon(Icons.add),
+            SizedBox(
+              width: 5,
+            ),
+            Text("Add"),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget updateStudentFlexible() {
+    return Flexible(
+      fit: FlexFit.tight,
+      flex: 2,
+      child: ElevatedButton(
+          onPressed: () {
+            //Updating Implementation
+          },
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.grey, foregroundColor: Colors.black),
+          child: const Row(
+            children: [
+              Icon(Icons.update),
+              SizedBox(
+                width: 5,
+              ),
+              Text("Update"),
+            ],
+          )),
+    );
+  }
+
+  Widget deleteStudentFlexible() {
+    return Flexible(
+      fit: FlexFit.tight,
+      flex: 2,
+      child: ElevatedButton(
+        onPressed: () {
+          //Delete Implementation
+          setState(() {
+            students.remove(selectedStudent);
+          });
+          var alert = AlertDialog(
+            title: const Text("Process"),
+            content: Text("${selectedStudent.firstName} has been Deleted"),
+          );
+          showDialog(context: context, builder: (builder) => alert);
+        },
+        style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.red, foregroundColor: Colors.black),
+        child: const Row(
+          children: [
+            Icon(Icons.delete),
+            SizedBox(
+              width: 5,
+            ),
+            Text("Delete"),
+          ],
+        ),
       ),
     );
   }

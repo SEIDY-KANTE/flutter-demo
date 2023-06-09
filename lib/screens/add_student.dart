@@ -1,12 +1,11 @@
-import 'package:demo/main.dart';
 import 'package:demo/models/student.dart';
 import 'package:flutter/material.dart';
 
 import '../validation/my_validator.dart';
 
 class AddStudent extends StatefulWidget {
-  List<Student> students;
-  AddStudent(this.students, {super.key});
+  final List<Student> students;
+  const AddStudent(this.students, {super.key});
 
   @override
   State<AddStudent> createState() => _AddStudent(students);
