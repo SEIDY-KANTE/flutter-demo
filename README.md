@@ -8,3 +8,5 @@
 ## Getting Started
 
 This project is a starting point for a Flutter application.
+
+![flutter-app](https://github.com/SEIDY-KANTE/flutter-demo/assets/82980518/1575945d-7a9b-458d-8a30-6a1c185e2f79)
