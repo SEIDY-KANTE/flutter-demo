@@ -1,5 +1,6 @@
 import 'package:demo/models/student.dart';
 import 'package:demo/screens/add_student.dart';
+import 'package:demo/screens/update_student.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -110,6 +111,16 @@ class _MyAppState extends State<MyApp> {
       child: ElevatedButton(
           onPressed: () {
             //Updating Implementation
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (builder) => UpdateStudent(selectedStudent))
+            ).then((value) => {
+              //refreshing
+              setState((){
+                //selectedStudent=students[students.length-1];
+              })
+            });
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.grey, foregroundColor: Colors.black),
