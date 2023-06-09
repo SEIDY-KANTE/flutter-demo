@@ -1,5 +1,5 @@
-import 'package:demo/models/Student.dart';
-import 'package:demo/screens/AddStudent.dart';
+import 'package:demo/models/student.dart';
+import 'package:demo/screens/add_student.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
     Student("Amir", "Kenth", 38)
   ];
 
-  Student selectedStudent = Student.withID(0, '', '', 0);
+  Student selectedStudent = Student.withoutInfo();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
                       setState(() {
                         selectedStudent = students[index];
                       });
-                    },
+                     },
                   );
                 }),
           ),
@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
                 child: ElevatedButton(
                   onPressed: () {
                     //Adding Implementation
-                    Navigator.push(context,MaterialPageRoute(builder: (builder)=>const AddStudent()));
+                    Navigator.push(context,MaterialPageRoute(builder: (builder)=> AddStudent(students)));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
