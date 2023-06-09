@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My flutter App"),
+        title: const Text("Student Management System DEMO"),
       ),
       body: Column(
         children: [
