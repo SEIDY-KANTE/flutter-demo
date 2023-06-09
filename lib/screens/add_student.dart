@@ -1,3 +1,4 @@
+import 'package:demo/main.dart';
 import 'package:demo/models/student.dart';
 import 'package:flutter/material.dart';
 
@@ -30,49 +31,68 @@ class _AddStudent extends State<AddStudent> with ValidatorMixin {
             key: _formKey,
             child: Column(
               children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.person_add),
-                    labelText: "Student First Name",
-                    hintText: "Seidy",
-                  ),
-                  validator: firstNameValidator,
-                  onSaved: (firstName) {
-                    student.firstName = firstName.toString();
-                  },
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.person_add_alt_1),
-                    labelText: "Student Last Name",
-                    hintText: "Kanté",
-                  ),
-                  validator: lastNameValidator,
-                  onSaved: (lastName) {
-                    student.lastName = lastName!;
-                  },
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.grade),
-                    labelText: "Student Grade",
-                    hintText: "0-100",
-                  ),
-                  validator: gradeValidator,
-                  onSaved: (grade) {
-                    student.grade = int.parse(grade!);
-                  },
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        print("Form is valid...");
-                      }
-                    },
-                    child: const Text('Save'))
+                buildFirstName(),
+                buildLastName(),
+                buildStudentGrade(),
+                submitButton(),
               ],
             ),
           ),
         ));
+  }
+
+  Widget buildFirstName() {
+    return TextFormField(
+      decoration: const InputDecoration(
+        icon: Icon(Icons.person_add),
+        labelText: "Student First Name",
+        hintText: "Seidy",
+      ),
+      validator: firstNameValidator,
+      onSaved: (firstName) {
+        student.firstName = firstName.toString();
+      },
+    );
+  }
+
+  Widget buildLastName() {
+    return TextFormField(
+      decoration: const InputDecoration(
+        icon: Icon(Icons.person_add_alt_1),
+        labelText: "Student Last Name",
+        hintText: "Kanté",
+      ),
+      validator: lastNameValidator,
+      onSaved: (lastName) {
+        student.lastName = lastName!;
+      },
+    );
+  }
+
+  Widget buildStudentGrade() {
+    return TextFormField(
+      decoration: const InputDecoration(
+        icon: Icon(Icons.grade),
+        labelText: "Student Grade",
+        hintText: "0-100",
+      ),
+      validator: gradeValidator,
+      onSaved: (grade) {
+        student.grade = int.parse(grade!);
+      },
+    );
+  }
+
+  Widget submitButton() {
+    return ElevatedButton(
+        onPressed: () {
+          if (_formKey.currentState!.validate()) {
+            _formKey.currentState!.save();
+            students.add(student);
+            Navigator.pop(context,true);
+          }
+        },
+
+        child: const Text('Save'));
   }
 }

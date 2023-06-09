@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
                       setState(() {
                         selectedStudent = students[index];
                       });
-                     },
+                    },
                   );
                 }),
           ),
@@ -64,7 +64,12 @@ class _MyAppState extends State<MyApp> {
                 child: ElevatedButton(
                   onPressed: () {
                     //Adding Implementation
-                    Navigator.push(context,MaterialPageRoute(builder: (builder)=> AddStudent(students)));
+                    Navigator.push(context,MaterialPageRoute(builder: (builder)=> AddStudent(students))).then((value) => {
+                      //Refreshing
+                      setState(() {
+                      selectedStudent = students[students.length-1];
+                    })
+                    });
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
@@ -110,9 +115,10 @@ class _MyAppState extends State<MyApp> {
                     setState(() {
                       students.remove(selectedStudent);
                     });
-                    var alert = const AlertDialog(
-                      title: Text("Process"),
-                      content: Text("Deleted"),
+                    var alert = AlertDialog(
+                      title: const Text("Process"),
+                      content:
+                          Text("${selectedStudent.firstName} has been Deleted"),
                     );
                     showDialog(context: context, builder: (builder) => alert);
                   },
